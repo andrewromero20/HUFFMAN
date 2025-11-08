@@ -1,8 +1,16 @@
 from collections import Counter
+from xmlrpc.client import Binary
+
+from encoders import load_from_disk
 from nodo import Nodo
 import heapq
 from imprimir_arbol import imprimir_arbol_texto
 from generar_codigos import generar_codigos
+import encoders
+
+INPUT_FILE_PATH = "libro.txt"
+OUTPUT_FILE_PATH = "./compressed.pae"
+DECOMPRESSED_FILE_PATH = "decompressed.txt"
 
 frecuencias = Counter()
 #Abrir el archivo en modo lectura
@@ -49,3 +57,9 @@ print("\n--- Tabla de Códigos de Huffman ---")
 tabla_huffman = {}
 #Llenar la tabla con los codigos generados
 generar_codigos(raiz_huffman, tabla_huffman)
+
+print("Comprimiendo con algoritmo Huffman")
+binary_string = encoders.huffman_encode(INPUT_FILE_PATH, tabla_huffman)
+encoders.write_to_disk(OUTPUT_FILE_PATH, binary_string)
+
+encoders.load_from_disk(OUTPUT_FILE_PATH)
