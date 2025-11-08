@@ -11,7 +11,7 @@ def huffman_encode(file_path, tabla_huffman):
     return compressed
 
 def write_to_disk(output_file_path, compressed):
-    with open(output_file_path, "ab") as f:
+    with open(output_file_path, "wb") as f:
         for i in range(0, len(compressed), 8):
             byte_str = compressed[i:i+8]
             if len(byte_str) < 8:

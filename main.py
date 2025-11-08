@@ -62,6 +62,6 @@ print("Comprimiendo con algoritmo Huffman")
 binary_string = encoders.huffman_encode(INPUT_FILE_PATH, tabla_huffman)
 encoders.write_to_disk(OUTPUT_FILE_PATH, binary_string)
 
-uncompressed_string = encoders.load_from_disk(OUTPUT_FILE_PATH)
-uncompressed_text = encoders.decode_huffman_string(uncompressed_string, raiz_huffman)
-print(uncompressed_text)
+uncompressed_binary_string = encoders.load_from_disk(OUTPUT_FILE_PATH)
+uncompressed_text = encoders.decode_huffman_string(uncompressed_binary_string, raiz_huffman)
+
