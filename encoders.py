@@ -1,3 +1,4 @@
+from  nodo import Nodo
 
 def huffman_encode(file_path, tabla_huffman):
     compressed = ""
@@ -30,3 +31,24 @@ def load_from_disk(filepath) -> str:
     full_binary_string = "".join(binary_string_parts)
 
     return full_binary_string
+
+def decode_huffman_string(compressed: str, tree_root: Nodo):
+    plain_text = ""
+    current_char = ""
+    current_node: Nodo = tree_root
+
+    for char in compressed:
+        if char == "0":
+            if current_node.izquierda is not None:
+                current_node = current_node.izquierda
+            else:
+                plain_text += current_node.char
+                current_node = tree_root.izquierda
+        else:
+            if current_node.derecha is not None:
+                current_node = current_node.derecha
+            else:
+                plain_text += current_node.char
+                current_node = tree_root.derecha
+
+    return plain_text
